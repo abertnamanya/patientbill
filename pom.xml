@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.openmrs.maven.parents</groupId>
+        <artifactId>maven-parent-openmrs-module</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+	<groupId>org.openmrs.module</groupId>
+	<artifactId>patientbill</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Patient Bill Module</name>
+	<description>no description</description>
+
+	<url>https://wiki.openmrs.org/x/FQ4z</url>
+
+	<scm>
+		<connection>scm:git:git@github.com:openmrs/openmrs-module-patientbill.git</connection>
+		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-patientbill.git</developerConnection>
+		<url>https://github.com/openmrs/openmrs-module-patientbill/</url>
+	</scm>
+
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Importing versions from refapp distro -->
+            <dependency>
+                <groupId>org.openmrs.distro</groupId>
+                <artifactId>referenceapplication</artifactId>
+	            <version>2.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+			<dependency>
+				<groupId>org.openmrs.api</groupId>
+				<artifactId>openmrs-api</artifactId>
+				<version>${openMRSVersion}</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>webservices.rest-omod</artifactId>
+				<version>${webservices.restVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.web</groupId>
+				<artifactId>openmrs-web</artifactId>
+				<version>${openMRSVersion}</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.api</groupId>
+				<artifactId>openmrs-api</artifactId>
+				<version>${openMRSVersion}</version>
+				<classifier>tests</classifier>
+				<type>jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.web</groupId>
+				<artifactId>openmrs-web</artifactId>
+				<version>${openMRSVersion}</version>
+				<classifier>tests</classifier>
+				<type>jar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.test</groupId>
+				<artifactId>openmrs-test</artifactId>
+				<version>${openMRSVersion}</version>
+				<type>pom</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernateVersion}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://mavenrepo.openmrs.org/public</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>https://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://mavenrepo.openmrs.org/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
+		<openMRSVersion>2.3.0</openMRSVersion>
+		<javaxVersion>4.0.1</javaxVersion>
+		<junitVersion>5.8.2</junitVersion>
+		<hibernateVersion>5.6.9.Final</hibernateVersion>
+		<webservices.restVersion>2.33.0</webservices.restVersion>
+	</properties>
+</project>
