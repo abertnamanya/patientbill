@@ -3,7 +3,6 @@ package org.openmrs.module.patientbill.api.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
@@ -16,8 +15,8 @@ import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("patientbill.PatientBillDao")
-public class PatientBillDao {
+@Repository("patientcustom.PatientCustomDao")
+public class PatientCustomDao {
 	
 	@Autowired
 	DbSessionFactory sessionFactory;

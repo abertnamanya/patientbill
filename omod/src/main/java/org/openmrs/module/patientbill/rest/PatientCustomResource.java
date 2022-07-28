@@ -7,14 +7,12 @@ import org.openmrs.Person;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientbill.Constants;
 import org.openmrs.module.patientbill.CustomPatientContext;
-import org.openmrs.module.patientbill.PatientBillService;
+import org.openmrs.module.patientbill.PatientCustomService;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.PropertyGetter;
 import org.openmrs.module.webservices.rest.web.annotation.PropertySetter;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
-import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
-import org.openmrs.module.webservices.rest.web.representation.FullRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.api.PageableResult;
 import org.openmrs.module.webservices.rest.web.resource.impl.DataDelegatingCrudResource;
@@ -28,9 +26,9 @@ import org.slf4j.LoggerFactory;
 
 @Resource(name = RestConstants.VERSION_1 + "/searchpatient", supportedClass = Patient.class, supportedOpenmrsVersions = {
         "2.2.*", "2.3.*", "2.4.*", "2.5.*", "2.6.*" })
-public class PatientBillResource extends DataDelegatingCrudResource<Patient> {
+public class PatientCustomResource extends DataDelegatingCrudResource<Patient> {
 	
-	private static final Logger log = LoggerFactory.getLogger(PatientBillResource.class);
+	private static final Logger log = LoggerFactory.getLogger(PatientCustomResource.class);
 	
 	private CustomPatientContext ctx = Context.getRegisteredComponent(Constants.COMPONENT_PATIENT_BILL_CONTEXT,
 	    CustomPatientContext.class);
@@ -82,7 +80,7 @@ public class PatientBillResource extends DataDelegatingCrudResource<Patient> {
 		return description;
 	}
 	
-	public List<Patient> searchPatient(PatientBillService as, String searchName, String mobileNo) {
+	public List<Patient> searchPatient(PatientCustomService as, String searchName, String mobileNo) {
 		if (searchName != null) {
 			return as.searchPatientByName(searchName);
 		} else if (mobileNo != null) {

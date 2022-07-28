@@ -3,9 +3,8 @@ package org.openmrs.module.patientbill;
 import java.util.List;
 
 import org.openmrs.Patient;
-import org.openmrs.api.OpenmrsService;
 
-public interface PatientBillService {
+public interface PatientCustomService {
 	
 	List<Patient> searchPatientByName(String searchName);
 	

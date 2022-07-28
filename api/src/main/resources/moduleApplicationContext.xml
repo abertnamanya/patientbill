@@ -9,16 +9,16 @@
 
 	<context:component-scan base-package="org.openmrs.module.patientbill"/>
 
-	<!-- Wraps PatientBillService methods in DB transactions and OpenMRS interceptors,
+	<!-- Wraps PatientCustomService methods in DB transactions and OpenMRS interceptors,
 	which set audit info like dateCreated, changedBy, etc.-->
-	<bean id="patientbill.PatientBillService"
+	<bean id="patientCustomService.PatientCustomService"
 	      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager">
 			<ref bean="transactionManager"/>
 		</property>
 		<property name="target">
-			<bean class="org.openmrs.module.patientbill.api.impl.PatientBillServiceImpl">
-				<property name="dao" ref="patientbill.PatientBillDao"/>
+			<bean class="org.openmrs.module.patientbill.api.impl.PatientCustomServiceImpl">
+				<property name="dao" ref="patientcustom.PatientCustomDao"/>
 			</bean>
 		</property>
 		<property name="preInterceptors">
@@ -29,13 +29,13 @@
 		</property>
 	</bean>
 
-	<!-- Adds PatientBillService to OpenMRS context so it can be accessed
-	calling Context.getService(PatientBillService.class) -->
+	<!-- Adds PatientCustomService to OpenMRS context so it can be accessed
+	calling Context.getService(PatientCustomService.class) -->
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list>
-				<value>org.openmrs.module.patientbill.PatientBillService</value>
-				<ref bean="patientbill.PatientBillService"/>
+				<value>org.openmrs.module.patientbill.PatientCustomService</value>
+				<ref bean="patientCustomService.PatientCustomService"/>
 			</list>
 		</property>
 	</bean>

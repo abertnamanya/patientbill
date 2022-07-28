@@ -3,17 +3,16 @@ package org.openmrs.module.patientbill.api.impl;
 import java.util.List;
 
 import org.openmrs.Patient;
-import org.openmrs.api.APIException;
-import org.openmrs.module.patientbill.PatientBillService;
-import org.openmrs.module.patientbill.api.dao.PatientBillDao;
+import org.openmrs.module.patientbill.PatientCustomService;
+import org.openmrs.module.patientbill.api.dao.PatientCustomDao;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public class PatientBillServiceImpl implements PatientBillService {
+public class PatientCustomServiceImpl implements PatientCustomService {
 	
-	PatientBillDao dao;
+	PatientCustomDao dao;
 	
-	public void setDao(PatientBillDao dao) {
+	public void setDao(PatientCustomDao dao) {
 		this.dao = dao;
 	}
 	

@@ -17,8 +17,8 @@ public class CustomPatientContext {
 	@Qualifier("patientService")
 	protected PatientService patientService;
 	
-	public PatientBillService getPatientBillService() {
-		return Context.getService(PatientBillService.class);
+	public PatientCustomService getPatientBillService() {
+		return Context.getService(PatientCustomService.class);
 	}
 	
 	public PatientService getPatientService() {
