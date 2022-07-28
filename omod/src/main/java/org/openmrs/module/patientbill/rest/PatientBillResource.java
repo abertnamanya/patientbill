@@ -82,32 +82,6 @@ public class PatientBillResource extends DataDelegatingCrudResource<Patient> {
 		return description;
 	}
 	
-	//	@Override
-	//	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
-	//		if (rep instanceof DefaultRepresentation) {
-	//			DelegatingResourceDescription description = new DelegatingResourceDescription();
-	//			description.addProperty("uuid");
-	//			description.addProperty("display");
-	//			//			description.addProperty("identifiers", Representation.REF);
-	//			//			description.addProperty("person", Representation.DEFAULT);
-	//			description.addProperty("voided");
-	//			description.addSelfLink();
-	//			description.addLink("full", ".?v=" + RestConstants.REPRESENTATION_FULL);
-	//			return description;
-	//		} else if (rep instanceof FullRepresentation) {
-	//			DelegatingResourceDescription description = new DelegatingResourceDescription();
-	//			description.addProperty("uuid");
-	//			description.addProperty("display");
-	//			//			description.addProperty("identifiers", Representation.DEFAULT);
-	//			//			description.addProperty("person", Representation.FULL);
-	//			description.addProperty("voided");
-	//			description.addProperty("auditInfo");
-	//			description.addSelfLink();
-	//			return description;
-	//		}
-	//		return null;
-	//	}
-	//
 	public List<Patient> searchPatient(PatientBillService as, String searchName, String mobileNo) {
 		if (searchName != null) {
 			return as.searchPatientByName(searchName);
@@ -122,6 +96,9 @@ public class PatientBillResource extends DataDelegatingCrudResource<Patient> {
 		String searchName = context.getRequest().getParameter("search_name");
 		String mobileNo = context.getRequest().getParameter("mobile_number");
 
+		if (searchName == null && mobileNo == null) { /** if both parameters are null **/
+			throw new GenericRestException("Please provide the a search parameter either search_name or mobile_number!");
+		}
 		List<Patient> patientList = searchPatient(ctx.getPatientBillService(), searchName, mobileNo);
 		if (patientList != null) {
 			return new NeedsPaging<>(patientList, context);
