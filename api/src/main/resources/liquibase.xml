@@ -28,4 +28,67 @@
 		                         baseColumnNames="concept_id" referencedTableName="concept"
 		                         referencedColumnNames="concept_id"/>
 	</changeSet>
+	<changeSet id="invoice_2022_07_29_001" author="abertnamanya">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="invoice"/>
+			</not>
+		</preConditions>
+		<comment>Creating Invoice Table</comment>
+		<createTable tableName="invoice">
+			<column name="invoice_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="invoice_no" type="int"/>
+			<column name="patient_id" type="INT"/>
+			<column name="date_created" type="datetime">
+				<constraints nullable="false"/>
+			</column>
+			<column defaultValueNumeric="0" name="creator" type="INT"/>
+			<column defaultValueBoolean="false" name="voided" type="BOOLEAN">
+				<constraints nullable="false"/>
+			</column>
+			<column name="voided_by" type="INT"/>
+			<column name="date_voided" type="datetime"/>
+			<column name="void_reason" type="VARCHAR(255)"/>
+			<column name="changed_by" type="INT"/>
+			<column name="date_changed" type="datetime"/>
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="invoice" constraintName="invoice_patient_id_fk"
+		                         referencedColumnNames="patient_id" referencedTableName="patient"/>
+		<addForeignKeyConstraint constraintName="invoice_creator_fk" baseTableName="invoice" baseColumnNames="creator"
+		                         referencedTableName="users" referencedColumnNames="user_id"/>
+		<addForeignKeyConstraint constraintName="invoice_changed_by_fk" baseTableName="invoice" baseColumnNames="changed_by"
+		                         referencedTableName="users" referencedColumnNames="user_id"/>
+		<addForeignKeyConstraint constraintName="invoice_voided_by_fk" baseTableName="invoice"
+		                         baseColumnNames="voided_by" referencedTableName="users" referencedColumnNames="user_id"/>
+	</changeSet>
+	<changeSet id="invoice_items_2022_07_29_001" author="abertnamanya">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="invoice_item"/>
+			</not>
+		</preConditions>
+		<comment>Creating Invoice Table</comment>
+		<createTable tableName="invoice_item">
+			<column name="invoice_item_id" type="int" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="invoice_id" type="INT"/>
+			<column name="service_catalog_id" type="INT"/>
+			<column name="uuid" type="CHAR(38)">
+				<constraints nullable="false" unique="true"/>
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="invoice_id" baseTableName="invoice_item"
+		                         constraintName="item_invoice_id_fk"
+		                         referencedColumnNames="invoice_id" referencedTableName="invoice"/>
+
+		<addForeignKeyConstraint constraintName="invoice_item_service_catalog_id_fk" baseTableName="invoice_item" baseColumnNames="service_catalog_id"
+		                         referencedTableName="service_catalog" referencedColumnNames="service_catalog_id"/>
+	</changeSet>
+
 </databaseChangeLog>
