@@ -8,17 +8,21 @@ import org.springframework.stereotype.Component;
 
 @Component(Constants.COMPONENT_CUSTOM_CONTEXT)
 public class CustomContext {
-	
+
 	@Autowired
 	@Qualifier("patientService")
 	protected PatientService patientService;
-	
+
 	public PatientCustomService getPatientBillService() {
 		return Context.getService(PatientCustomService.class);
 	}
-	
+
 	public ServiceCatalogService getCatalogService() {
 		return Context.getService(ServiceCatalogService.class);
 	}
-	
+
+	public InvoiceService getInvoiceService() {
+		return Context.getService(InvoiceService.class);
+	}
+
 }

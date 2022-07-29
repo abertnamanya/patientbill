@@ -8,14 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import java.util.Set;
 
 import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Patient;
-import org.openmrs.module.patientbill.api.InvoiceItem;
 
 @Entity
 @Table(name = "invoice")

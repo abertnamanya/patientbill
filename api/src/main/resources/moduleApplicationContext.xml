@@ -40,16 +40,66 @@
 		<property name="transactionAttributeSource" ref="transactionAttributeSource"/>
 	</bean>
 
-	<!-- Adds services to OpenMRS context so it can be accessed
-	eg) calling Context.getService(PatientCustomService.class) -->
+	<bean id="invoiceTarget" class="org.openmrs.module.patientbill.api.impl.InvoiceServiceImpl">
+		<property name="invoiceDao" ref="invoice.InvoiceDao"/>
+	</bean>
+	<bean id="invoice.invoiceService"
+	      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="invoiceTarget"/>
+		<property name="preInterceptors" ref="serviceInterceptors"/>
+		<property name="transactionAttributeSource" ref="transactionAttributeSource"/>
+	</bean>
+
+	<bean id="invoiceItemTarget" class="org.openmrs.module.patientbill.api.impl.InvoiceItemServiceImpl">
+		<property name="invoiceItemDao" ref="invoiceItem.InvoiceItemDao"/>
+	</bean>
+
+	<bean id="invoiceItem.invoiceItemService"
+	      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="invoiceItemTarget"/>
+		<property name="preInterceptors" ref="serviceInterceptors"/>
+		<property name="transactionAttributeSource" ref="transactionAttributeSource"/>
+	</bean>
+
+	<!-- Adds services to OpenMRS context so it can be accessed (eg) calling Context.getService(PatientCustomService.class) -->
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list>
-<!--				<value>org.openmrs.module.patientbill.PatientCustomService</value>-->
-<!--				<ref bean="patientCustomService.PatientCustomService"/>-->
+				<value>org.openmrs.module.patientbill.PatientCustomService</value>
+				<ref bean="patientCustomService.PatientCustomService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
 				<value>org.openmrs.module.patientbill.ServiceCatalogService</value>
 				<ref bean="serviceCatalog.ServiceCatalogService"/>
 			</list>
 		</property>
 	</bean>
+
+
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.patientbill.InvoiceService</value>
+				<ref bean="invoice.invoiceService"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.patientbill.InvoiceItemService</value>
+				<ref bean="invoiceItem.invoiceItemService"/>
+			</list>
+		</property>
+	</bean>
+
+
 </beans>
