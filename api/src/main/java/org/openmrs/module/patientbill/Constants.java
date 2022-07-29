@@ -4,6 +4,5 @@ public class Constants {
 	
 	public static final String MODULE_ARTIFACT_ID = "patientBill";
 	
-	public static final String COMPONENT_PATIENT_BILL_CONTEXT = MODULE_ARTIFACT_ID + ".PatientBillContext";
-	
+	public static final String COMPONENT_CUSTOM_CONTEXT = MODULE_ARTIFACT_ID + ".customContext";
 }

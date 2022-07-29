@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
- 
-    <!--
-    	See http://wiki.openmrs.org/display/docs/Module+liquibase+File for 
-    	documentation on this file.
-    
-        See http://www.liquibase.org/manual/home#available_database_refactorings
-        for a list of supported elements and attributes
-    -->
- 
- 	<!-- Uncomment the changeset below if you want to make the bill class persistable, see also bill and PatientBillDaoTest -->
- 	<!--
-	<changeSet id="patientbill-2016-08-02-12-21" author="raff">
+
+	<changeSet id="service_catalog_2022_07-28" author="abertnamanya">
 		<preConditions onFail="MARK_RAN">
-			<not><tableExists tableName="patientbill_item"/></not>
+			<not>
+				<tableExists tableName="service_catalog"/>
+			</not>
 		</preConditions>
 		<comment>
-			Creating the patientbill_item table
+			Creating the service_catalog table
 		</comment>
-		<createTable tableName="patientbill_item">
-			<column name="patientbill_item_id" type="int" autoIncrement="true">
+		<createTable tableName="service_catalog">
+			<column name="service_catalog_id" type="int" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false"/>
 			</column>
 			<column name="uuid" type="char(38)">
-				<constraints nullable="false" unique="true"></constraints>
+				<constraints nullable="false" unique="true"/>
 			</column>
-			<column name="owner" type="int" />
-			<column name="description" type="varchar(255)" />
+			<column name="concept_id" type="int"/>
+			<column name="price" type="double"/>
 		</createTable>
-        <addForeignKeyConstraint constraintName="patientbill_item_owner_fk" baseTableName="patientbill_item" baseColumnNames="owner"  referencedTableName="users"
-                                 referencedColumnNames="user_id" />
-    </changeSet> -->
- 
+		<addForeignKeyConstraint constraintName="service_catalog_concept_fk" baseTableName="service_catalog"
+		                         baseColumnNames="concept_id" referencedTableName="concept"
+		                         referencedColumnNames="concept_id"/>
+	</changeSet>
 </databaseChangeLog>

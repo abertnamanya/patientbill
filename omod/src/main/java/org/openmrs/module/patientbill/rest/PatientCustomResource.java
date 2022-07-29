@@ -6,7 +6,7 @@ import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientbill.Constants;
-import org.openmrs.module.patientbill.CustomPatientContext;
+import org.openmrs.module.patientbill.CustomContext;
 import org.openmrs.module.patientbill.PatientCustomService;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
@@ -30,8 +30,7 @@ public class PatientCustomResource extends DataDelegatingCrudResource<Patient> {
 	
 	private static final Logger log = LoggerFactory.getLogger(PatientCustomResource.class);
 	
-	private CustomPatientContext ctx = Context.getRegisteredComponent(Constants.COMPONENT_PATIENT_BILL_CONTEXT,
-	    CustomPatientContext.class);
+	private CustomContext ctx = Context.getRegisteredComponent(Constants.COMPONENT_CUSTOM_CONTEXT, CustomContext.class);
 	
 	@Override
 	public Patient getByUniqueId(String uuid) {

@@ -29,13 +29,26 @@
 		</property>
 	</bean>
 
-	<!-- Adds PatientCustomService to OpenMRS context so it can be accessed
-	calling Context.getService(PatientCustomService.class) -->
+	<bean id="serviceCatalogTarget" class="org.openmrs.module.patientbill.api.impl.ServiceCatalogServiceImpl">
+		<property name="catalogDao" ref="serviceCatalog.ServiceCatalogDao"/>
+	</bean>
+	<bean id="serviceCatalog.ServiceCatalogService"
+	      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="serviceCatalogTarget"/>
+		<property name="preInterceptors" ref="serviceInterceptors"/>
+		<property name="transactionAttributeSource" ref="transactionAttributeSource"/>
+	</bean>
+
+	<!-- Adds services to OpenMRS context so it can be accessed
+	eg) calling Context.getService(PatientCustomService.class) -->
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list>
-				<value>org.openmrs.module.patientbill.PatientCustomService</value>
-				<ref bean="patientCustomService.PatientCustomService"/>
+<!--				<value>org.openmrs.module.patientbill.PatientCustomService</value>-->
+<!--				<ref bean="patientCustomService.PatientCustomService"/>-->
+				<value>org.openmrs.module.patientbill.ServiceCatalogService</value>
+				<ref bean="serviceCatalog.ServiceCatalogService"/>
 			</list>
 		</property>
 	</bean>
