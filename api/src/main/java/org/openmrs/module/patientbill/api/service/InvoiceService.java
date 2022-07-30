@@ -1,8 +1,11 @@
-package org.openmrs.module.patientbill;
+package org.openmrs.module.patientbill.api.service;
 
 import java.util.List;
 
-public interface InvoiceService {
+import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.patientbill.api.entity.Invoice;
+
+public interface InvoiceService extends OpenmrsService {
 	
 	List<Invoice> getAllInvoices();
 	

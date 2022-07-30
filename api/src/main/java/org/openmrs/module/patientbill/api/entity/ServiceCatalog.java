@@ -1,4 +1,4 @@
-package org.openmrs.module.patientbill;
+package org.openmrs.module.patientbill.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

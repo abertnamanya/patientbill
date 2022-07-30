@@ -1,16 +1,15 @@
-package org.openmrs.module.patientbill;
+package org.openmrs.module.patientbill.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.openmrs.BaseOpenmrsObject;
-import org.openmrs.module.patientbill.Invoice;
-import org.openmrs.module.patientbill.ServiceCatalog;
 
 @Entity
 @Table(name = "invoice_item")
@@ -22,11 +21,11 @@ public class InvoiceItem extends BaseOpenmrsObject {
 	private Integer invoiceItemId;
 	
 	@ManyToOne
-	@Column(name = "invoice_id")
+	@JoinColumn(name = "invoice_id")
 	private Invoice invoice;
 	
 	@ManyToOne
-	@Column(name = "service_catalog_id")
+	@JoinColumn(name = "service_catalog_id")
 	private ServiceCatalog serviceCatalog;
 	
 	public InvoiceItem() {

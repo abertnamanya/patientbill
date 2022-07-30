@@ -1,8 +1,10 @@
-package org.openmrs.module.patientbill;
+package org.openmrs.module.patientbill.api.db.impl;
 
 import java.util.List;
 
-public interface ServiceCatalogService {
+import org.openmrs.module.patientbill.api.entity.ServiceCatalog;
+
+public interface ServiceCatalogDaoImpl {
 	
 	List<ServiceCatalog> getAllCatalogServices();
 	

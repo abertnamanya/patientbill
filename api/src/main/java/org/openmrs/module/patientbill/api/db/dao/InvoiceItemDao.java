@@ -1,48 +1,51 @@
-package org.openmrs.module.patientbill.api.dao;
+package org.openmrs.module.patientbill.api.db.dao;
 
+import lombok.Setter;
 import org.hibernate.criterion.Restrictions;
-import org.openmrs.api.db.hibernate.DbSession;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.openmrs.module.patientbill.api.db.impl.InvoiceItemDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import org.openmrs.module.patientbill.InvoiceItem;
+import org.openmrs.module.patientbill.api.entity.InvoiceItem;
 
-@Repository("invoiceItem.InvoiceItemDao")
-public class InvoiceItemDao {
+public class InvoiceItemDao implements InvoiceItemDaoImpl {
 	
-	@Autowired
+	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
+	
+	@Setter
 	DbSessionFactory sessionFactory;
 	
-	private DbSession getSession() {
-		return sessionFactory.getCurrentSession();
-	}
-	
+	@Override
 	@Transactional(readOnly = true)
 	public List<InvoiceItem> getAllInvoiceItems() {
 		return (List<InvoiceItem>) sessionFactory.getCurrentSession().createCriteria(InvoiceItem.class).list();
 	}
 	
+	@Override
 	@Transactional(readOnly = true)
 	public InvoiceItem getInvoiceItem(Integer invoiceItemId) {
 		return (InvoiceItem) sessionFactory.getCurrentSession().get(InvoiceItem.class, invoiceItemId);
 	}
 	
+	@Override
 	@Transactional(readOnly = true)
 	public InvoiceItem getInvoiceItemByUuid(String uuid) {
 		return (InvoiceItem) sessionFactory.getCurrentSession().createCriteria(InvoiceItem.class)
 		        .add(Restrictions.eq("uuid", uuid)).uniqueResult();
 	}
 	
+	@Override
 	@Transactional
 	public InvoiceItem saveInvoiceItem(InvoiceItem invoiceItem) {
 		sessionFactory.getCurrentSession().saveOrUpdate(invoiceItem);
 		return invoiceItem;
 	}
 	
+	@Override
 	@Transactional
 	public void purgeInvoiceItem(InvoiceItem invoiceItem) {
 		sessionFactory.getCurrentSession().delete(invoiceItem);

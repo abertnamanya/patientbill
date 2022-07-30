@@ -2,15 +2,13 @@ package org.openmrs.module.patientbill.rest;
 
 import io.swagger.models.Model;
 import io.swagger.models.ModelImpl;
-import io.swagger.models.properties.BooleanProperty;
 import io.swagger.models.properties.DoubleProperty;
 import io.swagger.models.properties.RefProperty;
 import io.swagger.models.properties.StringProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientbill.Constants;
 import org.openmrs.module.patientbill.CustomContext;
-import org.openmrs.module.patientbill.ServiceCatalog;
-import org.openmrs.module.webservices.docs.swagger.core.property.EnumProperty;
+import org.openmrs.module.patientbill.api.entity.ServiceCatalog;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;

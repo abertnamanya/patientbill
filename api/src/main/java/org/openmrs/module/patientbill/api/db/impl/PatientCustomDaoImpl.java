@@ -1,10 +1,10 @@
-package org.openmrs.module.patientbill;
+package org.openmrs.module.patientbill.api.db.impl;
 
 import java.util.List;
 
 import org.openmrs.Patient;
 
-public interface PatientCustomService {
+public interface PatientCustomDaoImpl {
 	
 	List<Patient> searchPatientByName(String searchName);
 	

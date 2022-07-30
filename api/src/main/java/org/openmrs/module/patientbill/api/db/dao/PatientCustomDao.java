@@ -1,7 +1,8 @@
-package org.openmrs.module.patientbill.api.dao;
+package org.openmrs.module.patientbill.api.db.dao;
 
 import java.util.List;
 
+import lombok.Setter;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.Disjunction;
@@ -10,27 +11,22 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.openmrs.Patient;
 import org.openmrs.Person;
-import org.openmrs.api.db.hibernate.DbSession;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.openmrs.module.patientbill.api.db.impl.PatientCustomDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
-@Repository("patientcustom.PatientCustomDao")
-public class PatientCustomDao {
+public class PatientCustomDao implements PatientCustomDaoImpl {
 	
-	@Autowired
-	DbSessionFactory sessionFactory;
+	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
 	
-	private DbSession getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+	@Setter
+	private DbSessionFactory sessionFactory;
 	
-	/**
-	 * @param searchName
-	 * @return
-	 */
+	@Override
+	@Transactional(readOnly = true)
 	public List<Patient> searchPatientByName(String searchName) {
-		
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Person.class, "person");
 		criteria.createAlias("person.names", "personName", JoinType.LEFT_OUTER_JOIN);
 		criteria.createAlias("person.attributes", "PersonAttribute", JoinType.LEFT_OUTER_JOIN);
@@ -52,10 +48,8 @@ public class PatientCustomDao {
 		return (List<Patient>) criteria.list();
 	}
 	
-	/**
-	 * @param mobileNo
-	 * @return
-	 */
+	@Override
+	@Transactional(readOnly = true)
 	public List<Patient> searchPatientByMobileNo(String mobileNo) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Person.class, "person");
 		
@@ -67,5 +61,4 @@ public class PatientCustomDao {
 		criteria.add(Restrictions.eq("attributeType.name", "Telephone Number"));
 		return (List<Patient>) criteria.list();
 	}
-	
 }

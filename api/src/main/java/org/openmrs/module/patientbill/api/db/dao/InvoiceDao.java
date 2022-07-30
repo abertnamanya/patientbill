@@ -1,24 +1,22 @@
-package org.openmrs.module.patientbill.api.dao;
+package org.openmrs.module.patientbill.api.db.dao;
 
 import java.util.List;
 
+import lombok.Setter;
 import org.hibernate.criterion.Restrictions;
-import org.openmrs.api.db.hibernate.DbSession;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
-import org.openmrs.module.patientbill.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.openmrs.module.patientbill.api.entity.Invoice;
+import org.openmrs.module.patientbill.api.db.impl.InvoiceDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository("invoice.InvoiceDao")
-public class InvoiceDao {
+public class InvoiceDao implements InvoiceDaoImpl {
 	
-	@Autowired
+	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
+	
+	@Setter
 	DbSessionFactory sessionFactory;
-	
-	private DbSession getSession() {
-		return sessionFactory.getCurrentSession();
-	}
 	
 	@Transactional(readOnly = true)
 	public List<Invoice> getAllInvoices() {

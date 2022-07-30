@@ -7,7 +7,7 @@ import org.openmrs.Person;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientbill.Constants;
 import org.openmrs.module.patientbill.CustomContext;
-import org.openmrs.module.patientbill.PatientCustomService;
+import org.openmrs.module.patientbill.api.service.PatientCustomService;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.PropertyGetter;
