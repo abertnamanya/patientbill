@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class InvoiceDao implements InvoiceDaoImpl {
 	
-	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
+	private static final Logger log = LoggerFactory.getLogger(InvoiceDao.class);
 	
 	@Setter
 	DbSessionFactory sessionFactory;

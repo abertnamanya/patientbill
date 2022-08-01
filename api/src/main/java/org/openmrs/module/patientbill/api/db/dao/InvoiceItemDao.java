@@ -14,7 +14,7 @@ import org.openmrs.module.patientbill.api.entity.InvoiceItem;
 
 public class InvoiceItemDao implements InvoiceItemDaoImpl {
 	
-	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
+	private static final Logger log = LoggerFactory.getLogger(InvoiceItemDao.class);
 	
 	@Setter
 	DbSessionFactory sessionFactory;

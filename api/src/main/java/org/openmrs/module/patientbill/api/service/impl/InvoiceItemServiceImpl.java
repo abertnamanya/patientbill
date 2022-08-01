@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Setter;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.patientbill.api.db.dao.InvoiceItemDao;
+import org.openmrs.module.patientbill.api.db.impl.InvoiceItemDaoImpl;
 import org.openmrs.module.patientbill.api.entity.InvoiceItem;
 import org.openmrs.module.patientbill.api.service.InvoiceItemService;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,30 +14,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class InvoiceItemServiceImpl extends BaseOpenmrsService implements InvoiceItemService {
 	
 	@Setter
-	private InvoiceItemDao daoItem;
+	private InvoiceItemDaoImpl dao;
 	
 	@Override
 	public List<InvoiceItem> getAllInvoiceItems() {
-		return daoItem.getAllInvoiceItems();
+		return dao.getAllInvoiceItems();
 	}
 	
 	@Override
 	public InvoiceItem getInvoiceItem(Integer invoiceItemId) {
-		return daoItem.getInvoiceItem(invoiceItemId);
+		return dao.getInvoiceItem(invoiceItemId);
 	}
 	
 	@Override
 	public InvoiceItem getInvoiceItemByUuid(String uuid) {
-		return daoItem.getInvoiceItemByUuid(uuid);
+		return dao.getInvoiceItemByUuid(uuid);
 	}
 	
 	@Override
 	public InvoiceItem saveInvoiceItem(InvoiceItem invoiceItem) {
-		return daoItem.saveInvoiceItem(invoiceItem);
+		return dao.saveInvoiceItem(invoiceItem);
 	}
 	
 	@Override
 	public void purgeInvoiceItem(InvoiceItem invoiceItem) {
-		daoItem.purgeInvoiceItem(invoiceItem);
+		dao.purgeInvoiceItem(invoiceItem);
 	}
 }

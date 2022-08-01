@@ -17,35 +17,35 @@ import org.openmrs.module.webservices.rest.web.response.ResponseException;
 @Resource(name = RestConstants.VERSION_1 + "/invoiceitem", supportedClass = Invoice.class, supportedOpenmrsVersions = {
         "2.2.*", "2.3.*", "2.4.*", "2.5.*", "2.6.*" })
 public class InvoiceItemResource extends DelegatingCrudResource<InvoiceItem> {
-
+	
 	private CustomContext ctx = Context.getRegisteredComponent(Constants.COMPONENT_CUSTOM_CONTEXT, CustomContext.class);
-
+	
 	@Override
 	public InvoiceItem getByUniqueId(String Uuid) {
 		return ctx.getInvoiceItemService().getInvoiceItemByUuid(Uuid);
 	}
-
+	
 	@Override
 	protected void delete(InvoiceItem invoiceItem, String s, RequestContext requestContext) throws ResponseException {
-
+		
 	}
-
+	
 	@Override
 	public InvoiceItem newDelegate() {
 		return new InvoiceItem();
 	}
-
+	
 	@Override
 	public InvoiceItem save(InvoiceItem invoiceItem) {
 		ctx.getInvoiceItemService().saveInvoiceItem(invoiceItem);
 		return invoiceItem;
 	}
-
+	
 	@Override
 	public void purge(InvoiceItem invoiceItem, RequestContext requestContext) throws ResponseException {
 		ctx.getInvoiceItemService().purgeInvoiceItem(invoiceItem);
 	}
-
+	
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation representation) {
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
@@ -53,7 +53,7 @@ public class InvoiceItemResource extends DelegatingCrudResource<InvoiceItem> {
 		description.addSelfLink();
 		return description;
 	}
-
+	
 	@Override
 	protected NeedsPaging<InvoiceItem> doGetAll(RequestContext context) throws ResponseException {
 		return new NeedsPaging<>(ctx.getInvoiceItemService().getAllInvoiceItems(), context);

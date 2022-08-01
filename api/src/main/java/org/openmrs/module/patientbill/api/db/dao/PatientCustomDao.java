@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class PatientCustomDao implements PatientCustomDaoImpl {
 	
-	private static final Logger log = LoggerFactory.getLogger(ServiceCatalogDao.class);
+	private static final Logger log = LoggerFactory.getLogger(PatientCustomDao.class);
 	
 	@Setter
 	private DbSessionFactory sessionFactory;
