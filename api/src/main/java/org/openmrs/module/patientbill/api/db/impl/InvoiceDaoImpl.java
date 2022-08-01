@@ -8,6 +8,8 @@ public interface InvoiceDaoImpl {
 	
 	List<Invoice> getAllInvoices();
 	
+	List<Invoice> searchInvoiceByInvoiceNo(String invoiceNo);
+	
 	Invoice getInvoice(Integer invoiceId);
 	
 	Invoice getInvoiceByUuid(String uuid);

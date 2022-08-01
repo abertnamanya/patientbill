@@ -21,6 +21,11 @@ public class InvoiceServiceImpl extends BaseOpenmrsService implements InvoiceSer
 	}
 	
 	@Override
+	public List<Invoice> searchInvoiceByInvoiceNo(String invoiceNo) {
+		return dao.searchInvoiceByInvoiceNo(invoiceNo);
+	}
+	
+	@Override
 	public Invoice getInvoice(Integer invoiceId) {
 		return dao.getInvoice(invoiceId);
 	}

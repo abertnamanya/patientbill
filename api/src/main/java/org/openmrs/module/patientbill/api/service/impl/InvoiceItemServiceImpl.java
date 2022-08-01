@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Setter;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.patientbill.api.db.dao.InvoiceItemDao;
 import org.openmrs.module.patientbill.api.db.impl.InvoiceItemDaoImpl;
 import org.openmrs.module.patientbill.api.entity.InvoiceItem;
 import org.openmrs.module.patientbill.api.service.InvoiceItemService;

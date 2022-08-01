@@ -10,11 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Patient;
-import org.openmrs.module.patientbill.api.entity.InvoiceItem;
 
 @Entity
 @Table(name = "invoice")
@@ -28,7 +28,7 @@ public class Invoice extends BaseOpenmrsData {
 	//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "generator")
 	//	@SequenceGenerator(name = "generator", sequenceName = "idgen_seq_id_gen")
 	@Column(name = "invoice_no")
-	private Integer InvoiceNo;
+	private String InvoiceNo;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "patient_id")
@@ -58,11 +58,11 @@ public class Invoice extends BaseOpenmrsData {
 		setInvoiceId(integer);
 	}
 	
-	public Integer getInvoiceNo() {
+	public String getInvoiceNo() {
 		return InvoiceNo;
 	}
 	
-	public void setInvoiceNo(Integer invoiceNo) {
+	public void setInvoiceNo(String invoiceNo) {
 		InvoiceNo = invoiceNo;
 	}
 	
@@ -75,10 +75,20 @@ public class Invoice extends BaseOpenmrsData {
 	}
 	
 	public Set<InvoiceItem> getInvoiceItems() {
+		if (invoiceItems == null) {
+			invoiceItems = new HashSet<>();
+		}
 		return invoiceItems;
 	}
 	
 	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
 		this.invoiceItems = invoiceItems;
+	}
+	
+	public void addInvoiceItem(InvoiceItem invoiceItem) {
+		if (invoiceItem != null) {
+			invoiceItem.setInvoice(this);
+			getInvoiceItems().add(invoiceItem);
+		}
 	}
 }

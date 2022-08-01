@@ -3,6 +3,7 @@ package org.openmrs.module.patientbill.api.db.dao;
 import java.util.List;
 
 import lombok.Setter;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.patientbill.api.entity.Invoice;
@@ -21,6 +22,14 @@ public class InvoiceDao implements InvoiceDaoImpl {
 	@Transactional(readOnly = true)
 	public List<Invoice> getAllInvoices() {
 		return (List<Invoice>) sessionFactory.getCurrentSession().createCriteria(Invoice.class).list();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Invoice> searchInvoiceByInvoiceNo(String invoiceNo) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Invoice.class);
+		criteria.add(Restrictions.eq("InvoiceNo", invoiceNo));
+		return (List<Invoice>) criteria.list();
 	}
 	
 	@Transactional(readOnly = true)

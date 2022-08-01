@@ -70,11 +70,19 @@ public class PatientCustomResource extends DataDelegatingCrudResource<Patient> {
 	public static void setPerson(Patient instance, String personUuid) {
 	}
 	
+	@PropertyGetter("display")
+	public String getDisplayString(Patient patient) {
+		if (patient.getPatientIdentifier() == null)
+			return "";
+		return patient.getPatientIdentifier().getIdentifier() + " - " + patient.getPersonName().getFullName();
+	}
+	
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
 		DelegatingResourceDescription description = new DelegatingResourceDescription();
 		description.addProperty("uuid");
-		description.addProperty("person", Representation.DEFAULT);
+		description.addProperty("display");
+		description.addProperty("person", Representation.REF);
 		description.addSelfLink();
 		return description;
 	}

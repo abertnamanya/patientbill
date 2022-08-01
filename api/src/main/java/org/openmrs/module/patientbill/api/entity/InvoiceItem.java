@@ -9,11 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.openmrs.BaseOpenmrsData;
 import org.openmrs.BaseOpenmrsObject;
+import org.openmrs.OpenmrsData;
 
 @Entity
 @Table(name = "invoice_item")
-public class InvoiceItem extends BaseOpenmrsObject {
+public class InvoiceItem extends BaseOpenmrsData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
